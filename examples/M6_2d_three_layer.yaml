@@ -1,0 +1,52 @@
+# M6 Example 2: 2D Three-Layer Tissue Geometry
+# Generic rectangular multilayer domain
+# Demonstrates automatic layer position calculation and Gmsh export
+
+experiment:
+  id: M6_2D_THREE_LAYER
+  name: M6 2D Three-Layer Tissue Geometry
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+geometry:
+  width: 0.05
+  layers:
+    - name: barrier_layer
+      thickness: 2.0e-5
+      diffusion_coefficient: 0.05e-10
+      clearance: 0.0
+      mesh_size: 5.0e-5
+
+    - name: active_layer
+      thickness: 1.0e-4
+      diffusion_coefficient: 1.5e-10
+      clearance: 0.002
+      mesh_size: 1.0e-4
+
+    - name: reservoir_layer
+      thickness: 2.0e-4
+      diffusion_coefficient: 3.0e-10
+      clearance: 0.0001
+      mesh_size: 2.0e-4
+
+simulation:
+  final_time: 1800.0
+  spatial_step: 0.0001
+  time_step: 5.0
+
+solver:
+  method: fem_2d
+
+boundary:
+  left:
+    type: dirichlet
+    value: 1.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+output:
+  directory: results/M6_2D_THREE_LAYER

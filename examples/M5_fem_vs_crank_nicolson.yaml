@@ -1,0 +1,39 @@
+# M5 Example 4: FEM vs Crank-Nicolson Comparison
+# Compares 1D FEM (backward Euler) with Crank-Nicolson
+# Both implicit, both unconditionally stable
+
+experiment:
+  id: M5_FEM_VS_CRANK_NICOLSON
+  name: M5 FEM vs Crank-Nicolson - Method Comparison
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: homogeneous_tissue
+      thickness: 0.01
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.0
+
+simulation:
+  final_time: 300.0
+  spatial_step: 0.0002
+  time_step: 100.0
+  n_elements: 50
+
+solver:
+  method: fem
+
+boundary:
+  left:
+    type: dirichlet
+    value: 1.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+output:
+  directory: results/M5_FEM_VS_CRANK_NICOLSON

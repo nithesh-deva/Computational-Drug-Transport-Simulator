@@ -1,0 +1,48 @@
+# M3 Example 3: Two-Layer Tissue with Partition Coefficient K=2.0
+# Higher concentration in second layer
+# Accumulation effect: second layer preferentially absorbs drug
+
+experiment:
+  id: M3_TWO_LAYER_K2
+  name: M3 Two-Layer Tissue - Partition Coefficient K=2.0
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: epithelium
+      thickness: 0.005
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.001
+
+    - name: dermis
+      thickness: 0.01
+      diffusion_coefficient: 0.5e-10
+      clearance: 0.0005
+
+interface:
+  epithelium_dermis:
+    partition_coefficient: 2.0
+    interface_type: partition
+
+simulation:
+  final_time: 3600.0
+  spatial_step: 0.0001
+  time_step: 10.0
+
+solver:
+  method: explicit_fdm_multilayer
+
+boundary:
+  left:
+    type: dirichlet
+    value: 1.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+output:
+  directory: results/M3_TWO_LAYER_K2

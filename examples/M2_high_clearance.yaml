@@ -1,0 +1,38 @@
+# M2 Example 3: High Clearance (Clearance-Limited)
+# Damköhler number Da = k·L²/D >> 1
+# In this regime, clearance dominates; drug is rapidly eliminated
+
+experiment:
+  id: M2_HIGH_CLEARANCE
+  name: M2 Reaction-Diffusion - High Clearance (Clearance-Limited)
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: homogeneous_tissue
+      thickness: 0.01
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.01  # High clearance: k = 0.01 1/s
+
+simulation:
+  final_time: 3600.0
+  spatial_step: 0.0001
+  time_step: 10.0
+
+solver:
+  method: explicit_fdm
+
+boundary:
+  left:
+    type: dirichlet
+    value: 1.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+output:
+  directory: results/M2_HIGH_CLEARANCE

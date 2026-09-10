@@ -1,0 +1,54 @@
+experiment:
+  id: M9_CUDA_LARGE_SCALE_BENCHMARK
+  name: M9 Large-Scale Benchmark - GPU Memory and Scaling
+
+description: |
+  Large-scale benchmark to measure GPU performance with varying problem sizes.
+  Tests GPU memory utilization and kernel scaling.
+  
+  Problem sizes:
+  - Small: 201 spatial points
+  - Medium: 501 spatial points
+  - Large: 1001 spatial points
+  - Very Large: 2001 spatial points
+  
+  Each runs 500 time steps to stress device memory and compute.
+  Measures: device memory, kernel efficiency, memory bandwidth.
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: tissue
+      thickness: 0.01
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.001
+
+simulation:
+  final_time: 500.0
+  spatial_step: 0.00005  # Fine grid for large-scale study
+  time_step: 50.0
+
+solver:
+  method: explicit_fdm
+
+boundary:
+  left:
+    type: dirichlet
+    value: 1.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+benchmark:
+  backends:
+    - cuda_gpu
+    - openmp_cpp
+  n_repeats: 3
+  report_format: json
+
+output:
+  directory: results/M9_CUDA_LARGE_SCALE_BENCHMARK

@@ -1,0 +1,19 @@
+# M7 Example 2: Clearance Sensitivity Sweep
+# Systematic variation of clearance coefficient k
+# Tests mass retention and penetration depth sensitivity
+
+experiment:
+  id: M7_SENSITIVITY_K
+  name: M7 Sensitivity Analysis - Clearance Coefficient
+
+sweep:
+  base_config: examples/M2_medium_clearance.yaml
+  strategy: full_factorial
+  parameters:
+    clearance:
+      - 0.0001
+      - 0.001
+      - 0.01
+
+output:
+  directory: results/M7_SENSITIVITY_K

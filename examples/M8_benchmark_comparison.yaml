@@ -1,0 +1,20 @@
+# M8 Example 1: Pure Python vs OpenMP Benchmark
+# Compares Python-loop, NumPy-vectorized, and C++/OpenMP backends
+# Run via benchmark runner, not direct simulation
+
+experiment:
+  id: M8_BENCHMARK_COMPARISON
+  name: M8 Performance Benchmark - Backend Comparison
+
+benchmark:
+  domain_length: 0.01
+  diffusion_coefficient: 1.0e-10
+  spatial_step: 0.0001
+  time_step: 50.0
+  clearance: 0.001
+  final_time: 200.0
+  n_repeats: 3
+  thread_list: [1, 2, 4]
+
+output:
+  directory: results/M8_BENCHMARK_COMPARISON

@@ -1,0 +1,41 @@
+# M1 Pure Diffusion Validation - Alternative Configuration
+# Uses uniform initial concentration for proper mass conservation testing
+# Problem: ∂C/∂t = D ∂²C/∂x²
+# Domain: [0, 0.01 m]
+# IC: C(x,0) = 1.0 mol/m³ (uniform initial)
+# BC: C(0,t) = 0.0 mol/m³ (Dirichlet, left), C(L,t) = 0.0 mol/m³ (Dirichlet, right)
+
+experiment:
+  id: M1_VALIDATION_MASS_CONSERVATION
+  name: M1 Pure Diffusion with Mass Conservation Test
+
+drug:
+  initial_concentration: 1.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: homogeneous_tissue
+      thickness: 0.01
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.0
+
+simulation:
+  final_time: 3600.0
+  spatial_step: 0.0001
+  time_step: 10.0
+
+solver:
+  method: explicit_fdm
+
+boundary:
+  left:
+    type: dirichlet
+    value: 0.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+output:
+  directory: results/M1_VALIDATION_MASS_CONSERVATION

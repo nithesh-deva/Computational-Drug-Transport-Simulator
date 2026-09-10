@@ -1,0 +1,52 @@
+experiment:
+  id: M9_CUDA_BACKEND_COMPARISON
+  name: M9 Backend Comparison - CPU vs GPU
+
+description: |
+  Benchmark comparison across all available backends:
+  - Pure Python explicit FDM (CPU baseline)
+  - NumPy-vectorized explicit FDM (CPU optimized)
+  - C++/OpenMP explicit FDM (CPU multi-threaded)
+  - CUDA GPU explicit FDM (GPU accelerated)
+  
+  Problem size: 101 spatial points, 200 time steps
+  Measures: runtime, throughput, speedup relative to baseline
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: homogeneous_tissue
+      thickness: 0.01
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.001
+
+simulation:
+  final_time: 200.0
+  spatial_step: 0.0001
+  time_step: 50.0
+
+solver:
+  method: explicit_fdm
+
+boundary:
+  left:
+    type: dirichlet
+    value: 1.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+benchmark:
+  backends:
+    - python_loop
+    - openmp_cpp
+    - cuda_gpu
+  n_repeats: 3
+  report_format: json
+
+output:
+  directory: results/M9_CUDA_BACKEND_COMPARISON

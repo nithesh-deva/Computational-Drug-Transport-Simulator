@@ -1,0 +1,19 @@
+# M7 Example 1: Diffusion Coefficient Sensitivity Sweep
+# Systematic variation of D to assess penetration sensitivity
+# Full factorial sweep over 3 diffusion coefficient values
+
+experiment:
+  id: M7_SENSITIVITY_D
+  name: M7 Sensitivity Analysis - Diffusion Coefficient
+
+sweep:
+  base_config: examples/M1_validation.yaml
+  strategy: full_factorial
+  parameters:
+    diffusion_coefficient:
+      - 0.5e-10
+      - 1.0e-10
+      - 2.0e-10
+
+output:
+  directory: results/M7_SENSITIVITY_D

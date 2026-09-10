@@ -1,0 +1,56 @@
+# M3 Example 4: Three-Layer Tissue (Skin Model)
+# Realistic skin architecture: stratum corneum | viable epidermis | dermis
+
+experiment:
+  id: M3_THREE_LAYER_SKIN
+  name: M3 Three-Layer Skin Model
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: stratum_corneum
+      thickness: 0.01
+      diffusion_coefficient: 0.1e-10
+      clearance: 0.0
+
+    - name: epidermis
+      thickness: 0.05
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.001
+
+    - name: dermis
+      thickness: 0.1
+      diffusion_coefficient: 2.0e-10
+      clearance: 0.0005
+
+interface:
+  stratum_corneum_epidermis:
+    partition_coefficient: 1.0
+    interface_type: partition
+
+  epidermis_dermis:
+    partition_coefficient: 1.5
+    interface_type: partition
+
+simulation:
+  final_time: 7200.0
+  spatial_step: 0.0001
+  time_step: 10.0
+
+solver:
+  method: explicit_fdm_multilayer
+
+boundary:
+  left:
+    type: dirichlet
+    value: 1.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+output:
+  directory: results/M3_THREE_LAYER_SKIN

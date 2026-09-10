@@ -1,0 +1,20 @@
+# M8 Example 2: Thread Scaling Study
+# Measures OpenMP speedup with 1, 2, 4, 8 threads
+# Requires compiled C++ OpenMP kernel
+
+experiment:
+  id: M8_THREAD_SCALING
+  name: M8 Performance - OpenMP Thread Scaling
+
+benchmark:
+  domain_length: 0.01
+  diffusion_coefficient: 1.0e-10
+  spatial_step: 0.0001
+  time_step: 50.0
+  clearance: 0.0
+  final_time: 500.0
+  thread_list: [1, 2, 4, 8]
+  n_repeats: 5
+
+output:
+  directory: results/M8_THREAD_SCALING

@@ -1,0 +1,39 @@
+# M5 Example 3: FEM Spatial Convergence Study
+# Demonstrates O(h) convergence with mesh refinement
+# Compares 10, 20, and 40 linear elements
+
+experiment:
+  id: M5_FEM_CONVERGENCE
+  name: M5 FEM Solver - Spatial Convergence Study
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: homogeneous_tissue
+      thickness: 0.01
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.0
+
+simulation:
+  final_time: 200.0
+  spatial_step: 0.0005
+  time_step: 50.0
+  n_elements: 40
+
+solver:
+  method: fem
+
+boundary:
+  left:
+    type: dirichlet
+    value: 1.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+output:
+  directory: results/M5_FEM_CONVERGENCE

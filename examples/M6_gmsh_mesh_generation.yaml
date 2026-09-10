@@ -1,0 +1,46 @@
+# M6 Example 3: Gmsh Mesh Generation and Export
+# Generates .geo script for automated mesh creation
+# Exports VTK/XDMF for ParaView visualization
+
+experiment:
+  id: M6_GMSH_MESH_GENERATION
+  name: M6 Gmsh Mesh Generation and ParaView Export
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+geometry:
+  width: 0.02
+  layers:
+    - name: top_layer
+      thickness: 5.0e-5
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.0
+      mesh_size: 2.0e-5
+
+    - name: bottom_layer
+      thickness: 1.5e-4
+      diffusion_coefficient: 2.0e-10
+      clearance: 0.0005
+      mesh_size: 5.0e-5
+
+simulation:
+  final_time: 1200.0
+  spatial_step: 0.0001
+  time_step: 10.0
+
+solver:
+  method: fem_2d
+
+boundary:
+  left:
+    type: dirichlet
+    value: 0.8
+
+  right:
+    type: dirichlet
+    value: 0.2
+
+output:
+  directory: results/M6_GMSH_MESH_GENERATION

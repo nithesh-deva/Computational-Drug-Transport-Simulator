@@ -1,0 +1,39 @@
+# M5 Example 2: FEM Reaction-Diffusion with Clearance
+# Tests first-order clearance in FEM framework
+# Mass decay verification: M(t) = M(0)*exp(-k*t)
+
+experiment:
+  id: M5_FEM_CLEARANCE
+  name: M5 FEM Solver - Reaction-Diffusion with Clearance
+
+drug:
+  initial_concentration: 1.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: homogeneous_tissue
+      thickness: 0.01
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.001
+
+simulation:
+  final_time: 200.0
+  spatial_step: 0.0005
+  time_step: 50.0
+  n_elements: 20
+
+solver:
+  method: fem
+
+boundary:
+  left:
+    type: dirichlet
+    value: 0.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+output:
+  directory: results/M5_FEM_CLEARANCE

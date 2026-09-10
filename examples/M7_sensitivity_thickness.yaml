@@ -1,0 +1,22 @@
+# M7 Example 3: Layer Thickness Sensitivity Sweep
+# Vary tissue thickness to assess penetration depth effects
+# Uses custom initial condition for different domain sizes
+
+experiment:
+  id: M7_SENSITIVITY_THICKNESS
+  name: M7 Sensitivity Analysis - Tissue Thickness
+
+sweep:
+  base_config: examples/M1_validation.yaml
+  strategy: grid
+  parameters:
+    thickness:
+      - 0.005
+      - 0.01
+      - 0.02
+    diffusion_coefficient:
+      - 1.0e-10
+      - 2.0e-10
+
+output:
+  directory: results/M7_SENSITIVITY_THICKNESS

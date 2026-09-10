@@ -1,0 +1,20 @@
+# M8 Example 3: Large-Scale Performance Benchmark
+# Tests performance on a larger domain with more grid points
+# Demonstrates scalability of C++/OpenMP backend
+
+experiment:
+  id: M8_LARGE_SCALE_BENCHMARK
+  name: M8 Performance - Large-Scale Domain Benchmark
+
+benchmark:
+  domain_length: 0.1
+  diffusion_coefficient: 1.0e-10
+  spatial_step: 0.0001
+  time_step: 10.0
+  clearance: 0.0001
+  final_time: 1000.0
+  n_repeats: 3
+  thread_list: [1, 4, 8]
+
+output:
+  directory: results/M8_LARGE_SCALE_BENCHMARK

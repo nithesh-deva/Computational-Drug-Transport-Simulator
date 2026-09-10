@@ -1,0 +1,19 @@
+# M7 Example 4: Partition Coefficient Sensitivity (Multilayer)
+# Vary interface partition coefficient K
+# Requires multilayer solver support
+
+experiment:
+  id: M7_SENSITIVITY_PARTITION
+  name: M7 Sensitivity Analysis - Partition Coefficient
+
+sweep:
+  base_config: examples/M3_two_layer_K1.yaml
+  strategy: full_factorial
+  parameters:
+    partition_coefficient:
+      - 0.5
+      - 1.0
+      - 2.0
+
+output:
+  directory: results/M7_SENSITIVITY_PARTITION

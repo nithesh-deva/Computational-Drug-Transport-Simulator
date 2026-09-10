@@ -1,0 +1,61 @@
+experiment:
+  id: M9_CUDA_NUMERICAL_VALIDATION
+  name: M9 Numerical Validation - CPU vs GPU Accuracy
+
+description: |
+  Numerical validation benchmark comparing CPU and GPU backends.
+  Verifies that GPU results match CPU results to machine precision.
+  
+  Tests multiple problem configurations:
+  - Varying diffusion coefficients
+  - Varying clearance rates
+  - Different spatial resolutions
+  
+  All backends must produce results within specified tolerance (rtol=1e-10, atol=1e-12).
+  Measures numerical agreement, not just performance.
+
+drug:
+  initial_concentration: 0.0
+  unit: mol/m3
+
+tissue:
+  layers:
+    - name: heterogeneous_layer1
+      thickness: 0.005
+      diffusion_coefficient: 1.0e-10
+      clearance: 0.001
+    - name: heterogeneous_layer2
+      thickness: 0.005
+      diffusion_coefficient: 5.0e-11
+      clearance: 0.002
+
+simulation:
+  final_time: 300.0
+  spatial_step: 0.0001
+  time_step: 50.0
+
+solver:
+  method: explicit_fdm
+
+boundary:
+  left:
+    type: dirichlet
+    value: 1.0
+
+  right:
+    type: dirichlet
+    value: 0.0
+
+benchmark:
+  backends:
+    - cuda_gpu
+    - openmp_cpp
+    - numpy_vectorized
+  numerical_validation: true
+  tolerance_rtol: 1.0e-10
+  tolerance_atol: 1.0e-12
+  n_repeats: 2
+  report_format: json
+
+output:
+  directory: results/M9_CUDA_NUMERICAL_VALIDATION
